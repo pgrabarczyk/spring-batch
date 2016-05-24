@@ -13,25 +13,26 @@ import lombok.extern.slf4j.Slf4j;
 public class App {
 
 	public static void main(String[] args) {
-		csvToMysql();
+		csvToDB("mysql");
+		csvToDB("oracle");
 	}
 	
-	private static void csvToMysql() {
+	private static void csvToDB(String db) {
 		String[] springConfig = {
-				"spring/batch/config/mysql/database.xml",
-				"spring/batch/config/mysql/context.xml",
-				"spring/batch/jobs/csvToMySQLJob.xml"
+				"spring/batch/config/"+db+"/database.xml",
+				"spring/batch/config/"+db+"/context.xml",
+				"spring/batch/jobs/csvToDBJob.xml"
 				};
 
 		ApplicationContext context = new ClassPathXmlApplicationContext(springConfig);
 
 		JobLauncher jobLauncher = context.getBean("jobLauncher", JobLauncher.class);
-		Job csvToMySQLJob = context.getBean("csvToMySQLJob", Job.class);
+		Job csvToMySQLJob = context.getBean("csvToDBJob", Job.class);
 
 		try {
 
 			JobExecution execution = jobLauncher.run(csvToMySQLJob, new JobParameters());
-			log.debug("Exit Status : " + execution.getStatus());
+			log.debug(db + " Exit Status : " + execution.getStatus());
 
 		} catch (Exception e) {
 			e.printStackTrace();

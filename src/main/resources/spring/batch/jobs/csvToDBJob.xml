@@ -8,7 +8,7 @@
 	<bean id="car" class="com.pgrabarczyk.spring.batch.model.Car"
 		scope="prototype" />
 
-	<batch:job id="csvToMySQLJob">
+	<batch:job id="csvToDBJob">
 		<batch:step id="step1">
 			<batch:tasklet>
 				<batch:chunk reader="cvsFileItemReader" writer="mysqlItemWriter"
