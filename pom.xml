@@ -16,6 +16,7 @@
 		<spring.version>4.2.6.RELEASE</spring.version>
 		<spring.batch.version>3.0.7.RELEASE</spring.batch.version>
 		<mysql.driver.version>5.1.38</mysql.driver.version>
+		<lombok.version>1.16.8</lombok.version>
 	</properties>
 
 	<build>
@@ -34,7 +35,7 @@
 
 	<dependencies>
 
-<!-- Spring Core -->
+		<!-- Spring Core -->
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
@@ -68,12 +69,19 @@
 			<artifactId>spring-batch-core</artifactId>
 			<version>${spring.batch.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.springframework.batch</groupId>
 			<artifactId>spring-batch-infrastructure</artifactId>
 			<version>${spring.batch.version}</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+		</dependency>
+
 
 		<!-- Loggers dependencies -->
 		<dependency>
@@ -91,7 +99,7 @@
 			<artifactId>slf4j-log4j12</artifactId>
 			<version>${slf4j.version}</version>
 		</dependency>
-		
+
 	</dependencies>
 
 </project>
