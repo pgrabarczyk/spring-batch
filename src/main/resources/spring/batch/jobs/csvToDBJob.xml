@@ -10,24 +10,33 @@
 
 	<batch:job id="csvToDBJob">
 		<batch:step id="step1-process-files">
-			<batch:tasklet>
+			<batch:tasklet allow-start-if-complete="true">
 				<batch:chunk reader="cvsMultiResourceItemReader" writer="sqlItemWriter"
 					commit-interval="100" />
 			</batch:tasklet>
+			<batch:listeners>
+				<batch:listener ref="multiResourceUpdateStepListener" />
+			</batch:listeners>
 		</batch:step>
 	</batch:job>
 
-	<bean id="cvsMultiResourceItemReader"
-		class="org.springframework.batch.item.file.MultiResourceItemReader">
+	<!-- step listener move files after processing -MultiResourceIteamReader had problems with refresh resources http://stackoverflow.com/questions/21880300/how-to-make-sure-the-multiresourceitemreader-refreshes-the-resources-each-time-t  -->
+	<bean id="multiResourceUpdateStepListener"
+		class="com.pgrabarczyk.spring.batch.job.MultiResourceUpdateStepListener"
+		scope="step">
+		<property name="filePattern" value="file:/tmp/spring-batch/input/car*.csv" />
+		<property name="targetResource" value="file:/tmp/spring-batch/output/" />
+	</bean>
 
-		<!-- Read a csv file -->
-		<property name="resources" value="file:/tmp/spring-batch/input/car*.csv" />
+	<bean id="cvsMultiResourceItemReader"
+		class="org.springframework.batch.item.file.MultiResourceItemReader" >
+		<!-- <property name="resources" value="file:/tmp/spring-batch/input/car*.csv" 
+			/> -->
 		<property name="delegate" ref="cvsFlatFileItemReader" />
 	</bean>
 
-	<bean id="cvsFlatFileItemReader" class="com.pgrabarczyk.spring.batch.job.MoveFlatFileItemReader">
+	<bean id="cvsFlatFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
 		<property name="lineMapper" ref="defaultLineMapper" />
-		<property name="targetResource" value="file:/tmp/spring-batch/output/" />
 	</bean>
 
 	<bean id="defaultLineMapper"
