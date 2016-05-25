@@ -9,11 +9,10 @@
 		scope="prototype" />
 
 	<batch:job id="csvToDBJob">
-		<batch:step id="step1">
+		<batch:step id="step1-process-files">
 			<batch:tasklet>
 				<batch:chunk reader="cvsMultiResourceItemReader" writer="sqlItemWriter"
-					commit-interval="2">
-				</batch:chunk>
+					commit-interval="100" />
 			</batch:tasklet>
 		</batch:step>
 	</batch:job>
@@ -22,31 +21,28 @@
 		class="org.springframework.batch.item.file.MultiResourceItemReader">
 
 		<!-- Read a csv file -->
-		<property name="resources" value="classpath:input/car*.csv" />
+		<property name="resources" value="file:/tmp/spring-batch/input/car*.csv" />
 		<property name="delegate" ref="cvsFlatFileItemReader" />
 	</bean>
 
-	<bean id="cvsFlatFileItemReader" class="org.springframework.batch.item.file.FlatFileItemReader">
-		<property name="lineMapper">
-			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
-				<!-- split it -->
-				<property name="lineTokenizer">
-					<bean
-						class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
-						<property name="names" value="year,brand,model" />
-					</bean>
-				</property>
-				<property name="fieldSetMapper">
-					<!-- return back to reader, rather than a mapped object. -->
-					<!-- <bean class="org.springframework.batch.item.file.mapping.PassThroughFieldSetMapper" 
-						/> -->
-					<!-- map to an object -->
-					<bean
-						class="org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper">
-						<property name="prototypeBeanName" value="car" />
-					</bean>
-				</property>
+	<bean id="cvsFlatFileItemReader" class="com.pgrabarczyk.spring.batch.job.MoveFlatFileItemReader">
+		<property name="lineMapper" ref="defaultLineMapper"/>
+		<property name="targetResource" value="file:/tmp/spring-batch/output/" />
+	</bean>
 
+	<bean id="defaultLineMapper"
+		class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+		<!-- split it -->
+		<property name="lineTokenizer">
+			<bean
+				class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+				<property name="names" value="year,brand,model" />
+			</bean>
+		</property>
+		<property name="fieldSetMapper">
+			<bean
+				class="org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper">
+				<property name="prototypeBeanName" value="car" />
 			</bean>
 		</property>
 
