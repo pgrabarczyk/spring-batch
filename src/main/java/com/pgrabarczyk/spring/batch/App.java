@@ -14,7 +14,7 @@ public class App {
 
 	public static void main(String[] args) {
 		csvToDB("mysql");
-		csvToDB("oracle");
+		//csvToDB("oracle");
 	}
 	
 	private static void csvToDB(String db) {
