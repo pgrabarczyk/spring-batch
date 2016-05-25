@@ -26,7 +26,7 @@
 	</bean>
 
 	<bean id="cvsFlatFileItemReader" class="com.pgrabarczyk.spring.batch.job.MoveFlatFileItemReader">
-		<property name="lineMapper" ref="defaultLineMapper"/>
+		<property name="lineMapper" ref="defaultLineMapper" />
 		<property name="targetResource" value="file:/tmp/spring-batch/output/" />
 	</bean>
 
