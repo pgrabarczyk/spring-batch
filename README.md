@@ -22,7 +22,7 @@ Every DB configuration have initialization scripts that can drop and create need
 
 ##Before run:
 - Make sure directories and rights are properly set:
-- 
+
   ``` bash
   cp -r spring-batch/src/main/resources/input /tmp/spring-batch/input
   ```
@@ -33,7 +33,6 @@ Every DB configuration have initialization scripts that can drop and create need
 - Make sure configuration of DB are properly set. (keep on mind db user need privileges to create tables)
 
 
-TODO:
---------------
+##TODO:
 - Use quartz to run job ( new files can come to input ).
 
