@@ -39,6 +39,11 @@ Every DB configuration have initialization scripts that can drop and create need
 - Make sure configuration of DB are properly set. (keep on mind db user need privileges to create tables)
 
 
+<<<<<<< HEAD
+=======
+##TODO:
+- Use quartz to run job ( new files can come to input ).
+>>>>>>> branch 'master' of https://github.com/pgrabarczyk/spring-batch.git
 
 ##Sample output execute:
 ```
