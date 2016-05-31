@@ -1,10 +1,6 @@
 # spring-batch
-Example project using spring-batch with quartz.
-
-
-
-##Quartz
-Running job per 20 seconds while application is running. 
+Example project using spring-batch with spring scheduling.
+Application runs job per 20 seconds.
 
 
 

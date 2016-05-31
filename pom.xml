@@ -17,8 +17,6 @@
 		<mysql.driver.version>5.1.38</mysql.driver.version>
 		<oracle.version>11.2.0.3</oracle.version>
 		<lombok.version>1.16.8</lombok.version>
-		<quartz.version>2.2.1</quartz.version>
-		<spring-support.version>2.0.8</spring-support.version>
 	</properties>
 
 	<build>
@@ -76,27 +74,6 @@
 			<groupId>org.springframework.batch</groupId>
 			<artifactId>spring-batch-infrastructure</artifactId>
 			<version>${spring.batch.version}</version>
-		</dependency>
-
-		<!-- Spring dependencies for Quartz -->
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-context-support</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-		
-		 <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-tx</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
-         
-
-		<!-- Quartz framework -->
-		<dependency>
-			<groupId>org.quartz-scheduler</groupId>
-			<artifactId>quartz</artifactId>
-			<version>${quartz.version}</version>
 		</dependency>
 
 		<!-- MySQL database driver -->

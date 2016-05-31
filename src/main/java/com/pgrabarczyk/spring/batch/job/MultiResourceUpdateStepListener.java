@@ -12,23 +12,32 @@ import org.springframework.batch.core.ExitStatus;
 import org.springframework.batch.core.StepExecution;
 import org.springframework.batch.core.StepExecutionListener;
 import org.springframework.batch.item.file.MultiResourceItemReader;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
 import org.springframework.core.io.Resource;
+import org.springframework.stereotype.Component;
 
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
+@Component
+@Scope("step")
+@PropertySource("classpath:config.properties")
 public class MultiResourceUpdateStepListener implements StepExecutionListener, ApplicationContextAware {
 
-	@Setter
+	@Value("${targetResource}")
 	private Resource targetResource;
 
 	private Resource[] resources;
+
 	@Setter
 	private ApplicationContext applicationContext;
-	@Setter
+
+	@Value("${filePattern}")
 	private String filePattern;
 
 	@Override
