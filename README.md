@@ -4,7 +4,7 @@ Application runs job per 20 seconds.
 
 
 
-##JOB
+## JOB
 Job have 1 step which:
 - Read multiple files from resource (set default in file:/tmp/spring-batch/input/car*.csv)
 - For every file:
@@ -13,7 +13,7 @@ Job have 1 step which:
 
 
 
-##Databases:
+## Databases:
 There are 2 configurations for Databases:
 - MySQL
 - Oracle
@@ -22,7 +22,7 @@ Every DB configuration have initialization scripts that can drop and create need
 
 
 
-##Before run:
+## Before run:
 - Make sure directories and rights are properly set:
 
   ``` bash
@@ -36,7 +36,7 @@ Every DB configuration have initialization scripts that can drop and create need
 
 
 
-##Sample output execute:
+## Sample output execute:
 ```
 //3 files in input folder: car01.csv,car02.csv,car03.csv >
 2016-05-30 14:54:40 DEBUG JdbcBatchItemWriter:167 - Executing batch with 100 items.
